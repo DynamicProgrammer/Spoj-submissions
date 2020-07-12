@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+	int k, l, n;
+	scanf("%d%d%d", &k, &l, &n);
+	
+	bool game[1000001];
+	
+	game[1] = true;
+	game[k] = true;
+	game[l] = true;
+	
+	int i=2;
+	
+	while(i<k)
+	{
+		game[i] = !game[i-1];
+		i++;
+	}
+	
+	i++;
+	
+	while(i<l)
+	{
+		if( game[i-1]==true && game[i-k]==true )
+		game[i++]=false;
+		else
+		game[i++]=true;
+	}
+	
+	i++;
+	
+	while(i<=1000000)
+	{
+		if( game[i-1]==true && game[i-k]==true && game[i-l]==true )
+		game[i++]=false;
+		else
+		game[i++]=true;
+	}
+	
+	while(n--)
+	{
+		scanf("%d",&k);
+		if(game[k]==true)
+		printf("A");
+		else
+		printf("B");
+	}
+	printf("\n");
+	return 0;
+} 
